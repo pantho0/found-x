@@ -1,14 +1,9 @@
+import CardSkeleton from "@/src/components/ui/CardSkeleton";
+import Container from "@/src/components/ui/Container";
 import { Button } from "@nextui-org/button";
-import Container from "../../ui/Container";
 import Link from "next/link";
-import getRecentPosts from "@/src/services/RecentPosts";
-import Card from "../../ui/Card";
 
-import { IPost } from "@/src/types";
-
-const RecentPosts = async () => {
-  const { data: posts } = await getRecentPosts();
-
+export default async function RecentPosts() {
   return (
     <Container>
       <div className="section-title my-8">
@@ -17,9 +12,9 @@ const RecentPosts = async () => {
           A list of items that have been recently found and reported.
         </p>
       </div>
-      <div className="my-8 grid justify-center gap-10 sm:grid-cols-1 md:grid-cols-4">
-        {posts.map((post: IPost) => (
-          <Card key={post?._id} post={post} />
+      <div className="my-8 grid justify-center gap-10 sm:grid-cols-1 md:grid-cols-3">
+        {[...Array(9)].map((idx) => (
+          <CardSkeleton key={idx} />
         ))}
       </div>
       <div className="flex justify-center">
@@ -29,6 +24,4 @@ const RecentPosts = async () => {
       </div>
     </Container>
   );
-};
-
-export default RecentPosts;
+}
