@@ -11,11 +11,10 @@ import { Link } from "@nextui-org/link";
 import { link as linkStyles } from "@nextui-org/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
-
+import NavDropDown from "./ui/NavDropDown";
 import { siteConfig } from "@/src/config/site";
 import { ThemeSwitch } from "@/src/components/ui/theme-switch";
 import { Logo } from "@/src/components/ui/icons";
-import NavDropDown from "./ui/NavDropDown";
 
 export const Navbar = () => {
   return (
