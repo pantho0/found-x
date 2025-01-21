@@ -8,12 +8,26 @@ import { registerUser } from "@/src/services/AuthService";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nextui-org/button";
+import { useMutation } from "@tanstack/react-query";
 
 import Link from "next/link";
 
 import { FieldValues, SubmitHandler } from "react-hook-form";
 
 export default function RegisterPage() {
+  const {
+    mutate: handleUserRegistration,
+    isPending,
+    data,
+    isError,
+    isSuccess,
+  } = useMutation({
+    mutationKey: ["USER_REGISTRATION"],
+    mutationFn: async (userData) => await registerUser(userData),
+  });
+
+  console.log({ isPending, isError, isSuccess, data });
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const userData = {
       ...data,
@@ -22,7 +36,7 @@ export default function RegisterPage() {
     };
 
     console.log("Inside form user data: ", userData);
-    registerUser(userData);
+    handleUserRegistration(userData);
   };
 
   return (
