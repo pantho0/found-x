@@ -15,23 +15,15 @@ const roleBasedRoutes = {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const userToken = await getCurrentUser();
-
-  console.log(userToken);
-
-  const user = {
-    name: "Pantho",
-    role: "USER",
-    token: "habijabi",
-  };
-
-  // const user = undefined;
+  const user = await getCurrentUser();
 
   if (!user) {
     if (AuthRoutes.includes(pathname)) {
       return NextResponse.next();
     } else {
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.redirect(
+        new URL(`/login?redirect=${pathname}`, request.url)
+      );
     }
   }
 

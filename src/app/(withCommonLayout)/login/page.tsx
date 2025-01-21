@@ -7,13 +7,26 @@ import loginValidationSchema from "@/src/schemas/login.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 
 const LoginPage = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const redirect = searchParams.get("redirect");
+
   const { mutate: handleUserLogin, isPending, isSuccess } = useUserLogin();
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     handleUserLogin(data);
   };
+
+  useEffect(() => {
+    if (!isPending && isSuccess) {
+      router.push(redirect || "/");
+    }
+  }, [isPending, isSuccess]);
 
   return (
     <>
