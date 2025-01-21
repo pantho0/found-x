@@ -1,3 +1,4 @@
+const { heroui } = require("@heroui/theme");
 import { nextui } from "@nextui-org/theme";
 
 /** @type {import('tailwindcss').Config} */
@@ -6,6 +7,7 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@heroui/theme/dist/components/spinner.js",
   ],
   theme: {
     extend: {
@@ -16,5 +18,5 @@ module.exports = {
     },
   },
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [nextui(), heroui()],
 };
