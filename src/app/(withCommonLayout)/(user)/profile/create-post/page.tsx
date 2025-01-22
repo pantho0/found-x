@@ -30,6 +30,7 @@ const cityOptions = allDistict()
 
 const CreatePost = () => {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
+  const [imagePreviews, setImagePreviews] = useState<string[] | []>([]);
 
   const methods = useForm();
   const {
@@ -65,15 +66,15 @@ const CreatePost = () => {
 
     setImageFiles((prev) => [...prev, file]);
 
-    // if (file) {
-    //   const reader = new FileReader();
+    if (file) {
+      const reader = new FileReader();
 
-    //   reader.onloadend = () => {
-    //     setImagePreviews((prev) => [...prev, reader.result as string]);
-    //   };
+      reader.onloadend = () => {
+        setImagePreviews((prev) => [...prev, reader.result as string]);
+      };
 
-    //   reader.readAsDataURL(file);
-    // }
+      reader.readAsDataURL(file);
+    }
   };
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
@@ -132,22 +133,22 @@ const CreatePost = () => {
             </div>
           </div>
 
-          {/* {imagePreviews.length > 0 && (
-              <div className="flex gap-5 my-5 flex-wrap">
-                {imagePreviews.map((imageDataUrl) => (
-                  <div
-                    key={imageDataUrl}
-                    className="relative size-48 rounded-xl border-2 border-dashed border-default-300 p-2"
-                  >
-                    <img
-                      alt="item"
-                      className="h-full w-full object-cover object-center rounded-md"
-                      src={imageDataUrl}
-                    />
-                  </div>
-                ))}
-              </div>
-            )} */}
+          {imagePreviews.length > 0 && (
+            <div className="flex gap-5 my-5 flex-wrap">
+              {imagePreviews.map((imageDataUrl) => (
+                <div
+                  key={imageDataUrl}
+                  className="relative size-48 rounded-xl border-2 border-dashed border-default-300 p-2"
+                >
+                  <img
+                    alt="item"
+                    className="h-full w-full object-cover object-center rounded-md"
+                    src={imageDataUrl}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
 
           <div className="flex flex-wrap-reverse gap-2 py-2">
             <div className="min-w-fit flex-1">
