@@ -1,7 +1,7 @@
 "use client";
 import { Divider } from "@heroui/divider";
 import { Button } from "@nextui-org/button";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { allDistict } from "@bangladeshi/bangladesh-address";
 import {
   FieldValues,
@@ -29,6 +29,8 @@ const cityOptions = allDistict()
   });
 
 const CreatePost = () => {
+  const [imageFiles, setImageFiles] = useState<File[] | []>([]);
+
   const methods = useForm();
   const {
     data: categoriesData,
@@ -54,16 +56,6 @@ const CreatePost = () => {
     name: "questions",
   });
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    const postData = {
-      ...data,
-      questions: data?.questions.map((que: { value: string }) => que?.value),
-      dateFound: dateToIso(data.dateFound),
-    };
-
-    console.log(postData);
-  };
-
   const handleFieldAppend = () => {
     append({ name: "questions" });
   };
@@ -73,15 +65,25 @@ const CreatePost = () => {
 
     setImageFiles((prev) => [...prev, file]);
 
-    if (file) {
-      const reader = new FileReader();
+    // if (file) {
+    //   const reader = new FileReader();
 
-      reader.onloadend = () => {
-        setImagePreviews((prev) => [...prev, reader.result as string]);
-      };
+    //   reader.onloadend = () => {
+    //     setImagePreviews((prev) => [...prev, reader.result as string]);
+    //   };
 
-      reader.readAsDataURL(file);
-    }
+    //   reader.readAsDataURL(file);
+    // }
+  };
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    const postData = {
+      ...data,
+      questions: data?.questions.map((que: { value: string }) => que?.value),
+      dateFound: dateToIso(data.dateFound),
+    };
+
+    console.log(postData);
   };
 
   return (
