@@ -4,6 +4,7 @@ import FXDatePicker from "@/src/components/form/FXDatePicker";
 import FXInput from "@/src/components/form/FXInput";
 import FXSelect from "@/src/components/form/FXSelect";
 import FXTextarea from "@/src/components/form/FXTextArea";
+import dateToIso from "@/src/utils/dateToIso";
 import { Divider } from "@heroui/divider";
 import { Button } from "@nextui-org/button";
 import { ChangeEvent } from "react";
@@ -29,6 +30,7 @@ const CreatePost = () => {
     const postData = {
       ...data,
       questions: data?.questions.map((que: { value: string }) => que?.value),
+      dateFound: dateToIso(data.dateFound),
     };
     console.log(postData);
   };
