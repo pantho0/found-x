@@ -1,10 +1,4 @@
 "use client";
-import { AddIcon, TrashIcon } from "@/src/assets/icons";
-import FXDatePicker from "@/src/components/form/FXDatePicker";
-import FXInput from "@/src/components/form/FXInput";
-import FXSelect from "@/src/components/form/FXSelect";
-import FXTextarea from "@/src/components/form/FXTextArea";
-import dateToIso from "@/src/utils/dateToIso";
 import { Divider } from "@heroui/divider";
 import { Button } from "@nextui-org/button";
 import { ChangeEvent } from "react";
@@ -17,6 +11,14 @@ import {
   useForm,
 } from "react-hook-form";
 
+import { AddIcon, TrashIcon } from "@/src/assets/icons";
+import FXDatePicker from "@/src/components/form/FXDatePicker";
+import FXInput from "@/src/components/form/FXInput";
+import FXSelect from "@/src/components/form/FXSelect";
+import FXTextarea from "@/src/components/form/FXTextArea";
+import dateToIso from "@/src/utils/dateToIso";
+import { useGetCategories } from "@/src/hooks/categories.hook";
+
 const cityOptions = allDistict()
   .sort()
   .map((city: string) => {
@@ -28,6 +30,22 @@ const cityOptions = allDistict()
 
 const CreatePost = () => {
   const methods = useForm();
+  const {
+    data: categoriesData,
+    isLoading: categoryLoading,
+    isSuccess: categorySuccess,
+  } = useGetCategories();
+
+  let categoryOption: { key: string; label: string }[] = [];
+
+  if (categoriesData?.data && !categoryLoading) {
+    categoryOption = categoriesData.data
+      .sort()
+      .map((category: { _id: string; name: string }) => ({
+        key: category._id,
+        label: category.name,
+      }));
+  }
 
   const { control, handleSubmit } = methods;
 
@@ -42,6 +60,7 @@ const CreatePost = () => {
       questions: data?.questions.map((que: { value: string }) => que?.value),
       dateFound: dateToIso(data.dateFound),
     };
+
     console.log(postData);
   };
 
@@ -86,14 +105,14 @@ const CreatePost = () => {
             </div>
           </div>
           <div className="flex flex-wrap gap-2 py-2">
-            {/* <div className="min-w-fit flex-1">
-                <FXSelect
-                  disabled={!categorySuccess}
-                  label="Category"
-                  name="category"
-                  options={categoryOption}
-                />
-              </div> */}
+            <div className="min-w-fit flex-1">
+              <FXSelect
+                disabled={!categorySuccess}
+                label="Category"
+                name="category"
+                options={categoryOption}
+              />
+            </div>
             <div className="min-w-fit flex-1">
               <label
                 className="flex h-14 w-full cursor-pointer items-center justify-center rounded-xl border-2 border-default-200 text-default-500 shadow-sm transition-all duration-100 hover:border-default-400"

@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
+import { Select, SelectItem } from "@heroui/select";
 
 import { IInput } from "@/src/types";
-import { Select, SelectItem } from "@heroui/select";
 
 interface IProps extends IInput {
   options: {

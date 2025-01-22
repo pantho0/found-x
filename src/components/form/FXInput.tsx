@@ -1,8 +1,9 @@
 "use client";
 
-import { IInput } from "@/src/types";
 import { Input } from "@nextui-org/input";
 import { useFormContext } from "react-hook-form";
+
+import { IInput } from "@/src/types";
 
 interface IProps extends IInput {}
 
@@ -22,13 +23,13 @@ export default function FXInput({
   return (
     <Input
       {...register(name)}
-      isInvalid={!!errors[name]}
       errorMessage={errors[name] ? (errors[name].message as string) : ""}
-      variant={variant}
-      size={size}
-      required={required}
-      type={type}
+      isInvalid={!!errors[name]}
       label={label}
+      required={required}
+      size={size}
+      type={type}
+      variant={variant}
     />
   );
 }

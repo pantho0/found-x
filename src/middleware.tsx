@@ -1,6 +1,7 @@
 import type { NextRequest } from "next/server";
 
 import { NextResponse } from "next/server";
+
 import { getCurrentUser } from "./services/AuthService";
 
 type Role = keyof typeof roleBasedRoutes;
@@ -22,7 +23,7 @@ export async function middleware(request: NextRequest) {
       return NextResponse.next();
     } else {
       return NextResponse.redirect(
-        new URL(`/login?redirect=${pathname}`, request.url)
+        new URL(`/login?redirect=${pathname}`, request.url),
       );
     }
   }

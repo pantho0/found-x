@@ -1,8 +1,5 @@
 "use client";
 
-import { protectedRoute } from "@/src/contants/contants";
-import { useUser } from "@/src/context/user.provider";
-import { logoutUser } from "@/src/services/AuthService";
 import { Avatar } from "@nextui-org/avatar";
 import {
   Dropdown,
@@ -11,6 +8,10 @@ import {
   DropdownTrigger,
 } from "@nextui-org/dropdown";
 import { usePathname, useRouter } from "next/navigation";
+
+import { protectedRoute } from "@/src/contants/contants";
+import { useUser } from "@/src/context/user.provider";
+import { logoutUser } from "@/src/services/AuthService";
 
 const NavDropDown = () => {
   const router = useRouter();
@@ -60,10 +61,10 @@ const NavDropDown = () => {
           Settings
         </DropdownItem>
         <DropdownItem
-          onPress={handelLogout}
           key="delete"
           className="text-danger"
           color="danger"
+          onPress={handelLogout}
         >
           Logout
         </DropdownItem>

@@ -1,7 +1,7 @@
 import { Controller } from "react-hook-form";
+import { DatePicker } from "@heroui/date-picker";
 
 import { IInput } from "@/src/types";
-import { DatePicker } from "@heroui/date-picker";
 
 interface IProps extends IInput {}
 

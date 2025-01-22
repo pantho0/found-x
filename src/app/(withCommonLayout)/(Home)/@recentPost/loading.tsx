@@ -1,7 +1,8 @@
-import CardSkeleton from "@/src/components/ui/CardSkeleton";
-import Container from "@/src/components/ui/Container";
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
+
+import CardSkeleton from "@/src/components/ui/CardSkeleton";
+import Container from "@/src/components/ui/Container";
 
 export default async function RecentPosts() {
   return (
