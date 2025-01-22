@@ -7,7 +7,7 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@heroui/theme/dist/components/(divider|spinner).js",
+    "./node_modules/@heroui/theme/dist/components/(date-picker|divider|select|spinner|button|ripple|calendar|date-input|form|popover|listbox|scroll-shadow).js",
   ],
   theme: {
     extend: {
