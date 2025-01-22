@@ -18,6 +18,7 @@ import FXSelect from "@/src/components/form/FXSelect";
 import FXTextarea from "@/src/components/form/FXTextArea";
 import dateToIso from "@/src/utils/dateToIso";
 import { useGetCategories } from "@/src/hooks/categories.hook";
+import { useUser } from "@/src/context/user.provider";
 
 const cityOptions = allDistict()
   .sort()
@@ -31,6 +32,7 @@ const cityOptions = allDistict()
 const CreatePost = () => {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreviews, setImagePreviews] = useState<string[] | []>([]);
+  const { user } = useUser();
 
   const methods = useForm();
   const {
@@ -78,13 +80,23 @@ const CreatePost = () => {
   };
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    const formData = new FormData();
+
     const postData = {
       ...data,
       questions: data?.questions.map((que: { value: string }) => que?.value),
       dateFound: dateToIso(data.dateFound),
+      user: user?._id,
     };
 
-    console.log(postData);
+    formData.append("data", JSON.stringify(postData));
+
+    for (let image of imageFiles) {
+      formData.append("itemImages", image);
+    }
+
+    console.log(formData.get("data"));
+    console.log(formData.get("itemImages"));
   };
 
   return (
