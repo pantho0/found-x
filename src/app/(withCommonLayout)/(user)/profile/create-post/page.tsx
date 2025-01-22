@@ -8,6 +8,7 @@ import dateToIso from "@/src/utils/dateToIso";
 import { Divider } from "@heroui/divider";
 import { Button } from "@nextui-org/button";
 import { ChangeEvent } from "react";
+import { allDistict } from "@bangladeshi/bangladesh-address";
 import {
   FieldValues,
   FormProvider,
@@ -15,6 +16,15 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
+
+const cityOptions = allDistict()
+  .sort()
+  .map((city: string) => {
+    return {
+      key: city,
+      label: city,
+    };
+  });
 
 const CreatePost = () => {
   const methods = useForm();
@@ -71,9 +81,9 @@ const CreatePost = () => {
             <div className="min-w-fit flex-1">
               <FXInput label="Location" name="location" />
             </div>
-            {/* <div className="min-w-fit flex-1">
-                <FXSelect label="City" name="city" options={cityOptions} />
-              </div> */}
+            <div className="min-w-fit flex-1">
+              <FXSelect label="City" name="city" options={cityOptions} />
+            </div>
           </div>
           <div className="flex flex-wrap gap-2 py-2">
             {/* <div className="min-w-fit flex-1">

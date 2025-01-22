@@ -9,6 +9,7 @@
 		"lint": "eslint . --ext .ts,.tsx -c .eslintrc.json --fix"
 	},
 	"dependencies": {
+		"@bangladeshi/bangladesh-address": "^1.0.5",
 		"@heroui/date-picker": "^2.3.10",
 		"@heroui/divider": "^2.2.6",
 		"@heroui/select": "^2.4.10",
