@@ -19,6 +19,9 @@ import FXTextarea from "@/src/components/form/FXTextArea";
 import dateToIso from "@/src/utils/dateToIso";
 import { useGetCategories } from "@/src/hooks/categories.hook";
 import { useUser } from "@/src/context/user.provider";
+import { useCreatePost } from "@/src/hooks/post.hook";
+import { useRouter } from "next/navigation";
+import Loading from "@/src/components/ui/Loading";
 
 const cityOptions = allDistict()
   .sort()
@@ -33,6 +36,8 @@ const CreatePost = () => {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
   const [imagePreviews, setImagePreviews] = useState<string[] | []>([]);
   const { user } = useUser();
+  const { mutate: handleCreatePost, isPending, isSuccess } = useCreatePost();
+  const router = useRouter();
 
   const methods = useForm();
   const {
@@ -95,12 +100,16 @@ const CreatePost = () => {
       formData.append("itemImages", image);
     }
 
-    console.log(formData.get("data"));
-    console.log(formData.get("itemImages"));
+    handleCreatePost(formData);
   };
+
+  if (!isPending && isSuccess) {
+    router.push("/");
+  }
 
   return (
     <div>
+      {isPending && <Loading />}
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-wrap gap-2 py-2">
