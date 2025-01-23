@@ -6,12 +6,12 @@ import { Calendar, MapPin } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@nextui-org/button";
 
+import ClaimRequestModal from "../../modals/ClaimRequestModal";
+
 import ImageGallery from "./ImageGallery";
 
 import { IPost, IUser } from "@/src/types";
 import { useUser } from "@/src/context/user.provider";
-import ClaimRequestModal from "../../modals/ClaimRequestModal";
-import AuthenticationModal from "../../modals/AuthenticationModal";
 
 interface IProps {
   post: IPost;
