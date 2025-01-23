@@ -12,6 +12,7 @@ import ImageGallery from "./ImageGallery";
 
 import { IPost, IUser } from "@/src/types";
 import { useUser } from "@/src/context/user.provider";
+import AuthenticationModal from "../../modals/AuthenticationModal";
 
 interface IProps {
   post: IPost;
@@ -70,7 +71,17 @@ export default function Post({ post }: IProps) {
         <ImageGallery images={images} />
 
         <div className="mt-4 flex gap-5">
-          <ClaimRequestModal id={_id} questions={questions} />
+          {email !== loggedInUser?.email && (
+            <>
+              {loggedInUser?.email && (
+                <ClaimRequestModal id={_id} questions={questions} />
+              )}
+              {!loggedInUser?.email && <AuthenticationModal id={_id} />}
+            </>
+          )}
+          {email !== loggedInUser?.email && (
+            <div className="w-[1px] bg-default-200" />
+          )}
 
           <Button className="flex-1" variant="light">
             Share
