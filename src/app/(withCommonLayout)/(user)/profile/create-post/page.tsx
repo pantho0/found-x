@@ -10,6 +10,7 @@ import {
   useFieldArray,
   useForm,
 } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 import { AddIcon, TrashIcon } from "@/src/assets/icons";
 import FXDatePicker from "@/src/components/form/FXDatePicker";
@@ -20,7 +21,6 @@ import dateToIso from "@/src/utils/dateToIso";
 import { useGetCategories } from "@/src/hooks/categories.hook";
 import { useUser } from "@/src/context/user.provider";
 import { useCreatePost } from "@/src/hooks/post.hook";
-import { useRouter } from "next/navigation";
 import Loading from "@/src/components/ui/Loading";
 
 const cityOptions = allDistict()
