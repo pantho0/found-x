@@ -3,9 +3,12 @@ import { Input } from "@nextui-org/input";
 
 import { SearchIcon } from "../../ui/icons";
 import { useForm } from "react-hook-form";
+import useDebounce from "@/src/hooks/debounce.hook";
 
 const Landing = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, watch } = useForm();
+
+  console.log(useDebounce(watch("search")));
 
   const onSubmit = async (data) => {
     console.log(data);
